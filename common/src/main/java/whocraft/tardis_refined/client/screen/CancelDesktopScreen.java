@@ -51,7 +51,7 @@ public class CancelDesktopScreen extends Screen {
     @Override
     public void render(GuiGraphics guiGraphics, int i, int j, float f) {
 
-        this.renderBackground(guiGraphics, i, j, f);
+        this.renderBackground(guiGraphics);
 
         /*Render Back drop*/
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
