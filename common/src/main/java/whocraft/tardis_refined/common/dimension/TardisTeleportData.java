@@ -27,7 +27,7 @@ public class TardisTeleportData extends SavedData {
     private List<TeleportEntry> queuedTeleports = new ArrayList<>();
 
     public static TardisTeleportData getOrCreate(ServerLevel level) {
-        return level.getDataStorage().computeIfAbsent(new <>(TardisTeleportData::new, TardisTeleportData::load, DataFixTypes.SAVED_DATA_MAP_DATA), DATA_KEY);
+        return level.getDataStorage().computeIfAbsent(TardisTeleportData::load, TardisTeleportData::new, DATA_KEY);
     }
 
     public static TardisTeleportData load(CompoundTag nbt) {
