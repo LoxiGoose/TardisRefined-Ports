@@ -24,7 +24,7 @@ public class UnlockUpgradeMessage extends MessageC2S {
     }
 
     public UnlockUpgradeMessage(FriendlyByteBuf buf) {
-        this.upgrade = Upgrades.UPGRADE_REGISTRY.get(buf.readResourceLocation());
+        this.upgrade = Upgrades.UPGRADE_DEFERRED_REGISTRY.get(buf.readResourceLocation());
     }
 
     @NotNull
@@ -35,7 +35,7 @@ public class UnlockUpgradeMessage extends MessageC2S {
 
     @Override
     public void toBytes(FriendlyByteBuf buf) {
-        buf.writeResourceLocation(Objects.requireNonNull(Upgrades.UPGRADE_REGISTRY.getKey(this.upgrade)));
+        buf.writeResourceLocation(Objects.requireNonNull(Upgrades.UPGRADE_DEFERRED_REGISTRY.getKey(this.upgrade)));
     }
 
     @Override

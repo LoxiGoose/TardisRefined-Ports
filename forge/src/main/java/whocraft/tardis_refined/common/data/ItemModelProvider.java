@@ -35,7 +35,7 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
         ResourceLocation leavesTexture = new ResourceLocation("tardis_refined:block/ars_leaves");
 
 
-        myFenceInventory(new ResourceLocation(TardisRefined.MODID, "ars_leaves_fence_inventory"), leavesTexture);
+//TODO        myFenceInventory(new ResourceLocation(TardisRefined.MODID, "ars_leaves_fence_inventory"), leavesTexture);
 
         blockItem(TRBlockRegistry.ARS_LEAVES_FENCE.getId(), new ResourceLocation(TardisRefined.MODID, "item/ars_leaves_fence_inventory"));
         blockItem(TRBlockRegistry.TERRAFORMER_BLOCK.getId());

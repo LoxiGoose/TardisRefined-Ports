@@ -10,7 +10,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import whocraft.tardis_refined.TRConfig;
 import whocraft.tardis_refined.TardisRefined;
-import whocraft.tardis_refined.common.crafting.astral_manipulator.ManipulatorRecipes;
 import whocraft.tardis_refined.common.data.*;
 
 @Mod(TardisRefined.MODID)
@@ -38,7 +37,9 @@ public class TardisRefinedForge {
     public void onGatherData(GatherDataEvent e) {
         DataGenerator generator = e.getGenerator();
         ExistingFileHelper existingFileHelper = e.getExistingFileHelper();
+/*
         ManipulatorRecipes.registerRecipes();
+*/
 
         /*Resource Pack*/
         generator.addProvider(e.includeClient(), new LangProviderEnglish(generator));
@@ -50,13 +51,18 @@ public class TardisRefinedForge {
         /*Data Pack*/
         generator.addProvider(e.includeServer(), new ProviderBlockTags(generator.getPackOutput(), e.getLookupProvider(), e.getExistingFileHelper()));
         generator.addProvider(e.includeServer(), new WorldGenProvider(generator.getPackOutput(), e.getLookupProvider()));
-        generator.addProvider(e.includeServer(), new ProviderLootTable(generator.getPackOutput()));
         generator.addProvider(e.includeServer(), new RecipeProvider(generator.getPackOutput()));
         generator.addProvider(e.includeServer(), new ConsolePatternProvider(generator));
         generator.addProvider(e.includeServer(), new DesktopProvider(generator));
         generator.addProvider(e.includeServer(), new HumProvider(generator));
         generator.addProvider(e.includeServer(), new ShellPatternProvider(generator, TardisRefined.MODID));
+
+        generator.addProvider(e.includeServer(), new ProviderLootTable(generator.getPackOutput()));
+
+
+        /*
         generator.addProvider(e.includeServer(), new ManipulatorRecipeProvider(generator, TardisRefined.MODID));
+*/
 
 
         //Tags

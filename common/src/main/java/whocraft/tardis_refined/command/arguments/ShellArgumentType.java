@@ -25,7 +25,7 @@ import java.util.stream.Stream;
 public class ShellArgumentType implements ArgumentType<ResourceLocation> {
 
     private static final Collection<String> EXAMPLES = Stream.of(ShellTheme.FACTORY.get(), ShellTheme.POLICE_BOX.get()).map((shell) -> {
-        return shell != null ? ShellTheme.SHELL_THEME_REGISTRY.getKey(shell).toString() : "";
+        return shell != null ? ShellTheme.SHELL_THEMES.getKey(shell).toString() : "";
     }).collect(Collectors.toList());
 
     public static final DynamicCommandExceptionType INVALID_SHELL_EXCEPTION = new DynamicCommandExceptionType((shell) -> Component.translatable(ModMessages.CMD_ARG_SHELL_INVALID, shell));
@@ -41,7 +41,7 @@ public class ShellArgumentType implements ArgumentType<ResourceLocation> {
 
     @Override
     public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
-        return SharedSuggestionProvider.suggestResource(ShellTheme.SHELL_THEME_REGISTRY.keySet(), builder);
+        return SharedSuggestionProvider.suggestResource(ShellTheme.SHELL_THEMES.getKeys(), builder);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class ShellArgumentType implements ArgumentType<ResourceLocation> {
 
     public static ShellTheme getShell(CommandContext<CommandSourceStack> context, String name) throws CommandSyntaxException {
         ResourceLocation resourcelocation = context.getArgument(name, ResourceLocation.class);
-        ShellTheme shellTheme = ShellTheme.SHELL_THEME_REGISTRY.get(resourcelocation);
+        ShellTheme shellTheme = ShellTheme.SHELL_THEMES.get(resourcelocation);
         if (shellTheme == null)
             throw INVALID_SHELL_EXCEPTION.create(resourcelocation);
         else
@@ -61,7 +61,7 @@ public class ShellArgumentType implements ArgumentType<ResourceLocation> {
 
     public static ResourceLocation getShellId(CommandContext<CommandSourceStack> context, String name) throws CommandSyntaxException {
         ResourceLocation resourcelocation = context.getArgument(name, ResourceLocation.class);
-        if (ShellTheme.SHELL_THEME_REGISTRY.get(resourcelocation) == null)
+        if (ShellTheme.SHELL_THEMES.get(resourcelocation) == null)
             throw INVALID_SHELL_EXCEPTION.create(resourcelocation);
         else
             return resourcelocation;

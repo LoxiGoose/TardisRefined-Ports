@@ -6,19 +6,18 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import whocraft.tardis_refined.TardisRefined;
+import whocraft.tardis_refined.registry.CustomRegistry;
 import whocraft.tardis_refined.registry.DeferredRegistry;
 import whocraft.tardis_refined.registry.RegistrySupplier;
 
 public class ShellTheme implements Theme {
 
-    /** Registry Key for the ShellTheme registry. For addon mods, use this as the registry key*/
-    public static final ResourceKey<Registry<ShellTheme>> SHELL_THEME_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(TardisRefined.MODID, "shell_theme"));
 
     /** Tardis Refined instance of the ShellTheme registry. Addon Mods: DO NOT USE THIS, it is only for Tardis Refined use only*/
-    public static final DeferredRegistry<ShellTheme> SHELL_THEMES = DeferredRegistry.createCustom(TardisRefined.MODID, SHELL_THEME_REGISTRY_KEY, true);
+    public static final CustomRegistry<ShellTheme> SHELL_THEMES = CustomRegistry.create(ShellTheme.class, new ResourceLocation(TardisRefined.MODID, "shell_theme"));
 
     /** Global instance of the Shell Theme custom registry created by Tardis Refined*/
-    public static final Registry<ShellTheme> SHELL_THEME_REGISTRY = SHELL_THEMES.getRegistry();
+    public static final DeferredRegistry<ShellTheme> SHELL_THEME_REGISTRY = DeferredRegistry.create(TardisRefined.MODID, SHELL_THEMES);
 
     public static final RegistrySupplier<ShellTheme> HALF_BAKED = registerShellTheme("half_baked"); // The default shell. Do not remove.
 
@@ -43,7 +42,7 @@ public class ShellTheme implements Theme {
 
 
     public static ShellTheme getShellTheme(ResourceLocation resourceLocation){
-        ShellTheme potentialTheme = SHELL_THEME_REGISTRY.get(resourceLocation);
+        ShellTheme potentialTheme = SHELL_THEMES.get(resourceLocation);
         if(potentialTheme != null){
             return potentialTheme;
         }
@@ -51,7 +50,7 @@ public class ShellTheme implements Theme {
     }
 
     public static ResourceLocation getKey(ShellTheme shellTheme){
-        return SHELL_THEME_REGISTRY.getKey(shellTheme);
+        return SHELL_THEMES.getKey(shellTheme);
     }
 
     private ResourceLocation translationKey;
@@ -66,11 +65,11 @@ public class ShellTheme implements Theme {
     }
 
     private static RegistrySupplier<ShellTheme> registerShellTheme(String id){
-        return SHELL_THEMES.register(id,  () -> new ShellTheme(new ResourceLocation(TardisRefined.MODID, id)));
+        return SHELL_THEME_REGISTRY.register(id,  () -> new ShellTheme(new ResourceLocation(TardisRefined.MODID, id)));
     }
 
     private static RegistrySupplier<ShellTheme> registerShellTheme(String id, boolean producesLight){
-        return SHELL_THEMES.register(id,  () -> new ShellTheme(new ResourceLocation(TardisRefined.MODID, id), producesLight));
+        return SHELL_THEME_REGISTRY.register(id,  () -> new ShellTheme(new ResourceLocation(TardisRefined.MODID, id), producesLight));
     }
 
     @Override

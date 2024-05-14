@@ -9,19 +9,17 @@ import whocraft.tardis_refined.TardisRefined;
 import whocraft.tardis_refined.common.tardis.control.ControlSpecification;
 import whocraft.tardis_refined.common.tardis.themes.console.*;
 import whocraft.tardis_refined.common.tardis.themes.console.sound.ConsoleSoundProfile;
+import whocraft.tardis_refined.registry.CustomRegistry;
 import whocraft.tardis_refined.registry.DeferredRegistry;
 import whocraft.tardis_refined.registry.RegistrySupplier;
 
 
 public class ConsoleTheme implements Theme {
 
-    /** Registry Key for the ConsoleTheme registry. For addon mods, use this as the registry key*/
-    public static final ResourceKey<Registry<ConsoleTheme>> CONSOLE_THEME_REGISTRY_KEY = ResourceKey.createRegistryKey(new ResourceLocation(TardisRefined.MODID, "console_theme"));
-
     /** Tardis Refined instance of the ConsoleTheme registry. Addon Mods: DO NOT USE THIS, it is only for Tardis Refined use only*/
-    public static final DeferredRegistry<ConsoleTheme> CONSOLE_THEMES = DeferredRegistry.create(TardisRefined.MODID, CONSOLE_THEME_REGISTRY_KEY);
+    public static final CustomRegistry<ConsoleTheme> CONSOLE_THEMES_REGISTRY = CustomRegistry.create(ConsoleTheme.class, new ResourceLocation(TardisRefined.MODID, "console_theme"));
     /** Global instance of the Console Theme custom registry created by Tardis Refined*/
-    public static final Registry<ConsoleTheme> CONSOLE_THEME_REGISTRY = CONSOLE_THEMES.getRegistry();
+    public static final DeferredRegistry<ConsoleTheme> CONSOLE_THEMES = DeferredRegistry.create(TardisRefined.MODID, CONSOLE_THEMES_REGISTRY);
 
     public static final RegistrySupplier<ConsoleTheme> FACTORY = registerConsoleTheme("factory", new FactoryConsoleTheme());
     public static final RegistrySupplier<ConsoleTheme> CRYSTAL = registerConsoleTheme("crystal", new CrystalConsoleTheme());

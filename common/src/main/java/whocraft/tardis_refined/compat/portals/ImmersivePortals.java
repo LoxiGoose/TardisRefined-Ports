@@ -142,7 +142,7 @@ public class ImmersivePortals {
                         new Vec3(-1.425, 0, 0), new Vec3(0, 0, -1.425),
                         new Vec3(1.425, 0, 0), new Vec3(0, 0, 1.425)), new Vec2(1, 2)));
 
-        for (ResourceLocation value : ShellTheme.SHELL_THEME_REGISTRY.keySet()) {
+        for (ResourceLocation value : ShellTheme.SHELL_THEMES.getKeys()) {
             if (!themeToOffsetMap.containsKey(value) && !value.equals(ShellTheme.BRIEFCASE)) {
                 TardisRefined.LOGGER.info("{} shell has not been setup for ImmersivePortals", value);
             }

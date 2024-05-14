@@ -57,7 +57,7 @@ public class ShellSelectionScreen extends SelectionScreen {
 
     public ShellSelectionScreen(ResourceLocation currentShellTheme) {
         super(Component.translatable(ModMessages.UI_SHELL_SELECTION));
-        this.themeList = ShellTheme.SHELL_THEME_REGISTRY.keySet().stream().toList();
+        this.themeList = ShellTheme.SHELL_THEMES.getKeys().stream().toList();
         generateDummyGlobalShell();
         this.currentShellTheme = currentShellTheme;
 
@@ -178,7 +178,7 @@ public class ShellSelectionScreen extends SelectionScreen {
 
     @Override
     public Component getSelectedDisplayName() {
-        ShellTheme theme = ShellTheme.SHELL_THEME_REGISTRY.get(this.currentShellTheme);
+        ShellTheme theme = ShellTheme.SHELL_THEMES.get(this.currentShellTheme);
         return theme.getDisplayName();
     }
 
@@ -189,9 +189,8 @@ public class ShellSelectionScreen extends SelectionScreen {
 
         selectionList.setRenderBackground(false);
 
-        for (Holder.Reference<ShellTheme> shellTheme : ShellTheme.SHELL_THEME_REGISTRY.holders().toList()) {
-            ShellTheme theme = shellTheme.value();
-            ResourceLocation shellThemeId = shellTheme.key().location();
+        for (ShellTheme theme : ShellTheme.SHELL_THEMES.getValues()) {
+            ResourceLocation shellThemeId = ShellTheme.getKey(theme);
 
             if (theme == ShellTheme.HALF_BAKED.get()) {
                 continue;

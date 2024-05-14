@@ -1,18 +1,18 @@
 package whocraft.tardis_refined.registry.fabric;
 
+import com.google.common.base.MoreObjects;
 
 import com.mojang.serialization.Codec;
-import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
-import net.fabricmc.fabric.api.event.registry.RegistryAttribute;
-import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
-import net.minecraft.core.WritableRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import whocraft.tardis_refined.registry.DeferredRegistry;
 import whocraft.tardis_refined.registry.RegistrySupplier;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class DeferredRegistryImpl {
@@ -21,35 +21,17 @@ public class DeferredRegistryImpl {
         return new Impl<>(modid, resourceKey);
     }
 
-    public static <T> DeferredRegistry<T> createCustom(String modid, ResourceKey<Registry<T>> resourceKey, boolean syncToClient) {
-        return new Impl<>(modid, resourceKey, syncToClient);
-    }
-
-
     @SuppressWarnings({"unchecked", "ConstantConditions"})
     public static class Impl<T> extends DeferredRegistry<T> {
 
         private final String modid;
-        private final WritableRegistry<T> registry;
-        private final boolean isCustom;
-        private final boolean syncToClient;
-        private ResourceKey<? extends Registry<T>> registryKey;
+        private final Registry<T> registry;
+        private final List<RegistrySupplier<T>> entries;
 
         public Impl(String modid, ResourceKey<? extends Registry<T>> resourceKey) {
             this.modid = modid;
-            this.registryKey = resourceKey;
-            this.isCustom = false;
-            this.syncToClient = false;
-            this.registry = (WritableRegistry<T>) BuiltInRegistries.REGISTRY.get(resourceKey.location());
-        }
-
-        public Impl(String modid, ResourceKey<Registry<T>> resourceKey, boolean syncToClient) {
-            this.modid = modid;
-            this.registryKey = resourceKey;
-            this.isCustom = true;
-            this.syncToClient = syncToClient;
-            this.registry = syncToClient ? (MappedRegistry<T>) FabricRegistryBuilder.createSimple(resourceKey).attribute(RegistryAttribute.SYNCED).buildAndRegister() : (MappedRegistry<T>) FabricRegistryBuilder.createSimple(resourceKey).buildAndRegister();
-
+            this.registry = (Registry<T>) MoreObjects.firstNonNull(BuiltInRegistries.REGISTRY.get(resourceKey.location()), BuiltInRegistries.REGISTRY.get(resourceKey.location()));
+            this.entries = new ArrayList<>();
         }
 
         @Override
@@ -61,17 +43,19 @@ public class DeferredRegistryImpl {
         public <R extends T> RegistrySupplier<R> register(String id, Supplier<R> supplier) {
             ResourceLocation registeredId = new ResourceLocation(this.modid, id);
             RegistrySupplier<R> registrySupplier = new RegistrySupplier<>(registeredId, Registry.register(this.registry, registeredId, supplier.get()));
+            this.entries.add((RegistrySupplier<T>) registrySupplier);
             return registrySupplier;
         }
 
         @Override
-        public Registry<T> getRegistry() {
-            return this.registry;
+        public Collection<RegistrySupplier<T>> getEntries() {
+            return this.entries;
         }
 
         @Override
         public Supplier<Codec<T>> getCodec() {
-            return () -> this.registry.byNameCodec();
+            return (com.google.common.base.Supplier<Codec<T>>) registry::byNameCodec;
         }
     }
+
 }

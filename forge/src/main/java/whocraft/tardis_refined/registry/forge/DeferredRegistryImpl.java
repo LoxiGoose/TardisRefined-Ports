@@ -2,14 +2,14 @@ package whocraft.tardis_refined.registry.forge;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryBuilder;
 import whocraft.tardis_refined.registry.DeferredRegistry;
 import whocraft.tardis_refined.registry.RegistrySupplier;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class DeferredRegistryImpl {
@@ -59,9 +59,8 @@ public class DeferredRegistryImpl {
         }
 
         @Override
-        public Registry<T> getRegistry() {
-            this.registry = this.isCustom ? (Registry<T>) this.register.makeRegistry(RegistryBuilder::new).get() : (Registry<T>) BuiltInRegistries.REGISTRY.get(this.registryKey.location());
-            return this.registry;
+        public Collection<RegistrySupplier<T>> getEntries() {
+            return List.of();
         }
 
         @Override

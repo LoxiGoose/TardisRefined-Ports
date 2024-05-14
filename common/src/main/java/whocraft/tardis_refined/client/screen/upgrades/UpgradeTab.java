@@ -59,7 +59,7 @@ public class UpgradeTab {
         List<UpgradeWidget> root = new LinkedList<>();
 
         // Create entry for each ability
-        for (Upgrade upgrade : Upgrades.UPGRADE_REGISTRY.stream().toList()) {
+        for (Upgrade upgrade : Upgrades.UPGRADE_DEFERRED_REGISTRY.getValues()) {
             var widget = new UpgradeWidget(this, this.minecraft, upgradeHandlerClient, upgrade).setPosition(0, 0);
             this.entries.add(widget);
             var pos = upgrade.getScreenPosition();
