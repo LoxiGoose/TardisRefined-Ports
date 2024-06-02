@@ -58,6 +58,7 @@ public class ControlEntity extends Entity {
     private ConsoleTheme consoleTheme;
     private BlockPos consoleBlockPos;
     private FlightDanceManager flightDanceManager;
+
     public ControlEntity(EntityType<?> entityTypeIn, Level level) {
         super(entityTypeIn, level);
     }

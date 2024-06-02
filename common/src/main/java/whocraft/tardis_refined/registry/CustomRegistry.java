@@ -7,7 +7,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Collection;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 

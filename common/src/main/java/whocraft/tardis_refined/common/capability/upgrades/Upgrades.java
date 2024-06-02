@@ -1,19 +1,14 @@
 package whocraft.tardis_refined.common.capability.upgrades;
 
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import whocraft.tardis_refined.TardisRefined;
 import whocraft.tardis_refined.common.util.RegistryHelper;
 import whocraft.tardis_refined.registry.CustomRegistry;
-import whocraft.tardis_refined.registry.TRBlockRegistry;
 import whocraft.tardis_refined.registry.DeferredRegistry;
 import whocraft.tardis_refined.registry.RegistrySupplier;
-
-import java.util.Optional;
+import whocraft.tardis_refined.registry.TRBlockRegistry;
 
 public class Upgrades {
 

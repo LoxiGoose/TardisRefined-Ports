@@ -1,12 +1,10 @@
 package whocraft.tardis_refined.registry;
 
-import com.mojang.serialization.Codec;
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import whocraft.tardis_refined.TardisRefined;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
 

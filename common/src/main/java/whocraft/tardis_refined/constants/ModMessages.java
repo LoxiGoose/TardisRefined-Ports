@@ -1,5 +1,7 @@
 package whocraft.tardis_refined.constants;
 
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.damagesource.DamageType;
 import whocraft.tardis_refined.TardisRefined;
 
 public class ModMessages {
@@ -68,7 +70,11 @@ public class ModMessages {
     public static final String CMD_ARG_UPGRADE_INVALID = cmdArgInvalid("upgrade");
     public static final String CMD_ARG_DESKTOP_INVALID = cmdArgInvalid("desktop");
     public static final String CMD_ARG_SHELL_INVALID = cmdArgInvalid("shell");
-    public static String GITHUB_RELEASE_PAGE = "https://github.com/Jeryn99/TardisRefined/releases";
+    public static final String POSITION = ui("position");
+    public static final String DIRECTION = ui("direction");
+    public static final String DIMENSION = ui("dimension");
+
+    public static String GITHUB_RELEASE_PAGE = "https://github.com/WhoCraft/TardisRefined/releases";
     /*Item Special cases*/
     public static String ITEM_KEYCHAIN = "item." + TardisRefined.MODID + ".keychain";
     public static String ITEM_GROUP = "itemGroup." + TardisRefined.MODID;

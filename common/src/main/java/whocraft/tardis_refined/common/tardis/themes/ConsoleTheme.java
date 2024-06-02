@@ -1,9 +1,7 @@
 package whocraft.tardis_refined.common.tardis.themes;
 
 import net.minecraft.Util;
-import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import whocraft.tardis_refined.TardisRefined;
 import whocraft.tardis_refined.common.tardis.control.ControlSpecification;
@@ -12,8 +10,6 @@ import whocraft.tardis_refined.common.tardis.themes.console.sound.ConsoleSoundPr
 import whocraft.tardis_refined.registry.CustomRegistry;
 import whocraft.tardis_refined.registry.DeferredRegistry;
 import whocraft.tardis_refined.registry.RegistrySupplier;
-
-import java.util.Optional;
 
 
 public class ConsoleTheme implements Theme {

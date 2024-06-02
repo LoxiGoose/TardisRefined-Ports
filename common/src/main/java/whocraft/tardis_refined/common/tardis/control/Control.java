@@ -1,7 +1,7 @@
 package whocraft.tardis_refined.common.tardis.control;
 
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +22,7 @@ public abstract class Control {
         this.id = id;
         this.langId = langId;
     }
+
     protected Control(ResourceLocation id) {
         this(id, "control." + id.getNamespace() + "." + id.getPath());
     }

@@ -36,6 +36,7 @@ public class TardisExteriorManager extends BaseHandler {
     private boolean locked;
     private boolean isLanding;
     private boolean isTakingOff;
+
     public TardisExteriorManager(TardisLevelOperator operator) {
         this.operator = operator;
     }

@@ -24,6 +24,7 @@ public class CustomRegistryImpl<T> extends CustomRegistry<T> {
         this.parent = parent;
         this.syncToClient = syncToClient;
     }
+
     public CustomRegistryImpl(WritableRegistry<T> parent) {
         this(parent, true);
     }
